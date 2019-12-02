@@ -17,7 +17,7 @@ import {
 
 const MovieDetailsScreen = ({ navigation }) => {
 
-  let movieId = navigation.getParam('idMovie', null);
+  let movieId = navigation && navigation.getParam('idMovie', null);
 
   const [movieDetails, setMovieDetails] = useState(null);
 

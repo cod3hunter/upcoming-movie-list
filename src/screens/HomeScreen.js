@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
 
   const MovieCardList = ({ item }) => (
     <MovieCard
-      containerStyle={{ marginTop: 10 }}
+      containerStyle={{ marginVertical: 8 }}
       title={item.title}
       releaseDate={item.release_date}
       voteAvarage={item.vote_average}
