@@ -5,7 +5,7 @@ import { API_KEY } from 'react-native-dotenv'
 
 import { MovieCard } from '../components';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [movies, setMovies] = useState([]);
   const [nextPage, setNextPage] = useState(1);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -33,7 +33,7 @@ const HomeScreen = () => {
   };
 
   const onPressMovie = idMovie => {
-    console.warn(`idMovie: ${idMovie}`)
+    navigation.navigate('MovieDetails', { idMovie })
   };
 
   useEffect(() => {

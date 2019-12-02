@@ -1,13 +1,16 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import { HomeScreen } from './src/screens';
+import { HomeScreen, MovieDetailsScreen } from './src/screens';
 
 const AppNavigator = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: HomeScreen,
     },
+    MovieDetails: {
+      screen: MovieDetailsScreen,
+    }
   },
   {
     headerMode: 'none'
