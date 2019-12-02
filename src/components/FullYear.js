@@ -1,13 +1,12 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
-const FullYear = props => {
-  const { dateString } = props;
+const FullYear = ({ dateString }) => {
   return (
     <Text style={styles.text}>
       {(new Date(dateString)).getFullYear() || ''}
     </Text>
-  ); 
+  );
 };
 
 const styles = StyleSheet.create({

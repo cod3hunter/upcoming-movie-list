@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const ProductionCompany = props => {
-  const { imageURI, companyName } = props;
+const ProductionCompany = ({ imageURI, companyName }) => {
   return (
     <View style={styles.container}>
       <Image

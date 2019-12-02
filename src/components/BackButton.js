@@ -3,8 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const BackButton = props => {
-  const { onPress } = props;
+const BackButton = ({ onPress }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
