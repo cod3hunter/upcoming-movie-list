@@ -22,7 +22,7 @@ const MovieDetailsScreen = ({ navigation }) => {
   const [movieDetails, setMovieDetails] = useState(null);
 
   const _getMovieDetails = async () => {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=pt-BR`
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
     const response = await fetch(url, { method: 'GET' });
     console.log(response);
     if (response.status === 200) {

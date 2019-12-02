@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
 
   const getMovies = async () => {
     setLoading(true);
-    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR&page=${nextPage}`;
+    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${nextPage}`;
 
     try {
       const response = await fetch(url, { method: 'GET' });
