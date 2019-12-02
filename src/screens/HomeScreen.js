@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Divider } from 'react-native-elements';
+import { API_KEY } from 'react-native-dotenv'
 
 import { MovieCard } from '../components';
 
@@ -12,7 +13,7 @@ const HomeScreen = () => {
 
   const getMovies = async () => {
     setLoading(true);
-    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=683654cddd717501a8c57f243e31cf0f&language=pt-BR&page=${nextPage}`;
+    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR&page=${nextPage}`;
 
     try {
       const response = await fetch(url, { method: 'GET' });
@@ -31,6 +32,10 @@ const HomeScreen = () => {
     }
   };
 
+  const onPressMovie = idMovie => {
+    console.warn(`idMovie: ${idMovie}`)
+  };
+
   useEffect(() => {
     getMovies();
   }, []);
@@ -43,7 +48,7 @@ const HomeScreen = () => {
       voteAvarage={item.vote_average}
       voteCount={item.vote_count}
       imageURI={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-    // onPress={() => _onPressMovie(item.id)}
+      onPress={() => onPressMovie(item.id)}
     />
   );
 
@@ -66,8 +71,6 @@ const HomeScreen = () => {
         renderItem={MovieCardList}
         keyExtractor={(item, index) => `${item.id}-${index}`}
         ListHeaderComponent={() => (<Text style={styles.title}> Upcoming Movies</Text>)}
-        // initialNumToRender={8}
-        // refreshing={refreshing}
         onEndReachedThreshold={0.5}
         onEndReached={isLastPage ? null : getMovies}
         ItemSeparatorComponent={() => <Divider />}
