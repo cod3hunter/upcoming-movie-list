@@ -62,6 +62,16 @@ const HomeScreen = ({ navigation }) => {
     )
   };
 
+  if (!loading && (!movies || movies.length < 1)) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>
+          Something went wrong. Please try again later!
+        </Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -99,7 +109,9 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  errorContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  errorText: { textAlign: 'center', fontSize: 18 },
 });
 
 export default HomeScreen;

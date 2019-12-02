@@ -12,7 +12,8 @@ import {
   Image,
   Linking,
   ImageBackground,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator
 } from 'react-native';
 
 const MovieDetailsScreen = ({ navigation }) => {
@@ -20,14 +21,21 @@ const MovieDetailsScreen = ({ navigation }) => {
   let movieId = navigation && navigation.getParam('idMovie', null);
 
   const [movieDetails, setMovieDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const _getMovieDetails = async () => {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-    const response = await fetch(url, { method: 'GET' });
-    console.log(response);
-    if (response.status === 200) {
-      const data = await response.json();
-      setMovieDetails(data);
+    setLoading(true);
+    try {
+      const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
+      const response = await fetch(url, { method: 'GET' });
+      if (response.status === 200) {
+        const data = await response.json();
+        setMovieDetails(data);
+      }
+    } catch (error) {
+
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,7 +67,25 @@ const MovieDetailsScreen = ({ navigation }) => {
     _getMovieDetails();
   }, [])
 
-  return movieDetails && (
+  if (loading) {
+    return (
+      <View style={styles.errorContainer}>
+        <ActivityIndicator size="large" />
+      </View>
+    )
+  }
+
+  if (!loading && !movieDetails) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>
+          Something went wrong. Please try again later!
+        </Text>
+      </View>
+    )
+  }
+
+  return (
     <>
       <BackButton onPress={() => navigation.goBack()} />
       <ScrollView style={styles.scrollViewContainer}>
@@ -171,7 +197,9 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     flex: 1,
     marginLeft: 15
-  }
+  },
+  errorContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  errorText: { textAlign: 'center', fontSize: 18 },
 });
 
 export default MovieDetailsScreen;
